@@ -510,6 +510,10 @@ tasks.register("generateJson") {
     dependenciesURLs.forEach { (dependency: Dependency, url: URL?) ->
         url ?: return@forEach
 
+        if (dependency.group.equals("org.lwjgl.lwjgl", true)) {
+            return@forEach
+        }
+
         val file = configurations.implementation.get().files(dependency)
             .firstOrNull { it.name.equals("${dependency.name}-${dependency.version}.jar", true) }
 
