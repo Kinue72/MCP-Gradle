@@ -4,13 +4,11 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - uses: gradle/wrapper-validation-action@v1
-      - name: Setup JDK
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: 8

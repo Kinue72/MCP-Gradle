@@ -9,7 +9,7 @@
 - First, you need to run Minecraft *version* for the first time to download all the assets.
 - Second, you need to change the working directory to the path where Minecraft was downloaded to.
 ```bash
-git clone https://github.com/Kinue72/MCP-Gradle
+git clone https://github.com/Kinue72/MCP-Gradle.git
 cd MCP-Gradle
 ./gradlew run
 ```
@@ -17,7 +17,7 @@ cd MCP-Gradle
 
 ## How to build
 ```bash
-git clone https://github.com/Kinue72/MCP-Gradle
+git clone https://github.com/Kinue72/MCP-Gradle.git
 cd MCP-Gradle
 ./gradlew jar
 ```
