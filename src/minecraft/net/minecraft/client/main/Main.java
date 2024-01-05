@@ -94,8 +94,7 @@ public class Main
         PropertyMap propertymap = (PropertyMap)gson.fromJson((String)optionset.valueOf(optionspec15), PropertyMap.class);
         PropertyMap propertymap1 = (PropertyMap)gson.fromJson((String)optionset.valueOf(optionspec16), PropertyMap.class);
         File file1 = (File)optionset.valueOf(optionspec2);
-        //File file2 = optionset.has(optionspec3) ? (File)optionset.valueOf(optionspec3) : new File(file1, "assets/");
-        File file2 = getAssetsDir();
+        File file2 = optionset.has(optionspec3) ? (File)optionset.valueOf(optionspec3) : new File(file1, "assets/");
         File file3 = optionset.has(optionspec4) ? (File)optionset.valueOf(optionspec4) : new File(file1, "resourcepacks/");
         String s4 = optionset.has(optionspec10) ? (String)optionspec10.value(optionset) : (String)optionspec9.value(optionset);
         String s5 = optionset.has(optionspec17) ? (String)optionspec17.value(optionset) : null;
@@ -117,23 +116,5 @@ public class Main
     private static boolean isNullOrEmpty(String str)
     {
         return str != null && !str.isEmpty();
-    }
-
-    private static File getAssetsDir() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        String userHome = System.getProperty("user.home");
-        File dotMinecraft = null;
-
-        if (osName.contains("win")) {
-            dotMinecraft = new File(userHome, ".minecraft");
-        } else if (osName.contains("mac")) {
-            dotMinecraft = new File(userHome, "Library/Application Support/minecraft");
-        } else if (osName.contains("nix") || osName.contains("nux") || osName.contains("uni")) {
-            dotMinecraft = new File(userHome, ".minecraft");
-        } else {
-            throw new UnsupportedOperationException("Unsupported operating system");
-        }
-
-        return new File(dotMinecraft, "assets");
     }
 }
