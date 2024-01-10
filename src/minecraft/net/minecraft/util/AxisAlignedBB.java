@@ -236,7 +236,7 @@ public class AxisAlignedBB
     }
 
     /**
-     * Returns if the supplied Vec3D is completely inside the bounding box
+     * Returns if the supplied Vec3 is completely inside the bounding box
      */
     public boolean isVecInside(Vec3 vec)
     {
@@ -377,7 +377,7 @@ public class AxisAlignedBB
     }
 
     /**
-     * Checks if the specified vector is within the YZ dimensions of the bounding box. Args: Vec3D
+     * Checks if the specified vector is within the YZ dimensions of the bounding box. Args: Vec3
      */
     private boolean isVecInYZ(Vec3 vec)
     {
@@ -385,7 +385,7 @@ public class AxisAlignedBB
     }
 
     /**
-     * Checks if the specified vector is within the XZ dimensions of the bounding box. Args: Vec3D
+     * Checks if the specified vector is within the XZ dimensions of the bounding box. Args: Vec3
      */
     private boolean isVecInXZ(Vec3 vec)
     {
@@ -393,7 +393,7 @@ public class AxisAlignedBB
     }
 
     /**
-     * Checks if the specified vector is within the XY dimensions of the bounding box. Args: Vec3D
+     * Checks if the specified vector is within the XY dimensions of the bounding box. Args: Vec3
      */
     private boolean isVecInXY(Vec3 vec)
     {
@@ -408,5 +408,21 @@ public class AxisAlignedBB
     public boolean hasNaN()
     {
         return Double.isNaN(this.minX) || Double.isNaN(this.minY) || Double.isNaN(this.minZ) || Double.isNaN(this.maxX) || Double.isNaN(this.maxY) || Double.isNaN(this.maxZ);
+    }
+
+    public Vec3 getCenter() {
+        return new Vec3(
+                this.minX + (this.maxX - this.minX) / 2,
+                this.minY + (this.maxY - this.minY) / 2,
+                this.minZ + (this.maxZ - this.minZ) / 2
+        );
+    }
+
+    public boolean intersects(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
+        return this.minX < maxX && this.maxX > minX && this.minY < maxY && this.maxY > minY && this.minZ < maxZ && this.maxZ > minZ;
+    }
+
+    public boolean intersects(Vec3 pos1, Vec3 pos2) {
+        return this.intersects(Math.min(pos1.xCoord, pos2.xCoord), Math.min(pos1.yCoord, pos2.yCoord), Math.min(pos1.zCoord, pos2.zCoord), Math.max(pos1.xCoord, pos2.xCoord), Math.max(pos1.yCoord, pos2.yCoord), Math.max(pos1.zCoord, pos2.zCoord));
     }
 }

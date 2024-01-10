@@ -56,18 +56,18 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback
             ++i;
         }
 
-        if (this.mc.theWorld != null)
+        if (this.mc.world != null)
         {
-            EnumDifficulty enumdifficulty = this.mc.theWorld.getDifficulty();
+            EnumDifficulty enumdifficulty = this.mc.world.getDifficulty();
             this.field_175357_i = new GuiButton(108, this.width / 2 - 155 + i % 2 * 160, this.height / 6 - 12 + 24 * (i >> 1), 150, 20, this.func_175355_a(enumdifficulty));
             this.buttonList.add(this.field_175357_i);
 
-            if (this.mc.isSingleplayer() && !this.mc.theWorld.getWorldInfo().isHardcoreModeEnabled())
+            if (this.mc.isSingleplayer() && !this.mc.world.getWorldInfo().isHardcoreModeEnabled())
             {
                 this.field_175357_i.setWidth(this.field_175357_i.getButtonWidth() - 20);
                 this.field_175356_r = new GuiLockIconButton(109, this.field_175357_i.xPosition + this.field_175357_i.getButtonWidth(), this.field_175357_i.yPosition);
                 this.buttonList.add(this.field_175356_r);
-                this.field_175356_r.func_175229_b(this.mc.theWorld.getWorldInfo().isDifficultyLocked());
+                this.field_175356_r.func_175229_b(this.mc.world.getWorldInfo().isDifficultyLocked());
                 this.field_175356_r.enabled = !this.field_175356_r.func_175230_c();
                 this.field_175357_i.enabled = !this.field_175356_r.func_175230_c();
             }
@@ -119,9 +119,9 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback
     {
         this.mc.displayGuiScreen(this);
 
-        if (id == 109 && result && this.mc.theWorld != null)
+        if (id == 109 && result && this.mc.world != null)
         {
-            this.mc.theWorld.getWorldInfo().setDifficultyLocked(true);
+            this.mc.world.getWorldInfo().setDifficultyLocked(true);
             this.field_175356_r.func_175229_b(true);
             this.field_175356_r.enabled = false;
             this.field_175357_i.enabled = false;
@@ -144,13 +144,13 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback
 
             if (button.id == 108)
             {
-                this.mc.theWorld.getWorldInfo().setDifficulty(EnumDifficulty.getDifficultyEnum(this.mc.theWorld.getDifficulty().getDifficultyId() + 1));
-                this.field_175357_i.displayString = this.func_175355_a(this.mc.theWorld.getDifficulty());
+                this.mc.world.getWorldInfo().setDifficulty(EnumDifficulty.getDifficultyEnum(this.mc.world.getDifficulty().getDifficultyId() + 1));
+                this.field_175357_i.displayString = this.func_175355_a(this.mc.world.getDifficulty());
             }
 
             if (button.id == 109)
             {
-                this.mc.displayGuiScreen(new GuiYesNo(this, (new ChatComponentTranslation("difficulty.lock.title", new Object[0])).getFormattedText(), (new ChatComponentTranslation("difficulty.lock.question", new Object[] {new ChatComponentTranslation(this.mc.theWorld.getWorldInfo().getDifficulty().getDifficultyResourceKey(), new Object[0])})).getFormattedText(), 109));
+                this.mc.displayGuiScreen(new GuiYesNo(this, (new ChatComponentTranslation("difficulty.lock.title", new Object[0])).getFormattedText(), (new ChatComponentTranslation("difficulty.lock.question", new Object[] {new ChatComponentTranslation(this.mc.world.getWorldInfo().getDifficulty().getDifficultyResourceKey(), new Object[0])})).getFormattedText(), 109));
             }
 
             if (button.id == 110)

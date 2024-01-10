@@ -53,7 +53,7 @@ public class GuiIngameMenu extends GuiScreen
                 boolean flag = this.mc.isIntegratedServerRunning();
                 boolean flag1 = this.mc.isConnectedToRealms();
                 button.enabled = false;
-                this.mc.theWorld.sendQuittingDisconnectingPacket();
+                this.mc.world.sendQuittingDisconnectingPacket();
                 this.mc.loadWorld((WorldClient)null);
 
                 if (flag)
@@ -81,11 +81,11 @@ public class GuiIngameMenu extends GuiScreen
                 break;
 
             case 5:
-                this.mc.displayGuiScreen(new GuiAchievements(this, this.mc.thePlayer.getStatFileWriter()));
+                this.mc.displayGuiScreen(new GuiAchievements(this, this.mc.player.getStatFileWriter()));
                 break;
 
             case 6:
-                this.mc.displayGuiScreen(new GuiStats(this, this.mc.thePlayer.getStatFileWriter()));
+                this.mc.displayGuiScreen(new GuiStats(this, this.mc.player.getStatFileWriter()));
                 break;
 
             case 7:

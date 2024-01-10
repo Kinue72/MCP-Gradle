@@ -137,23 +137,23 @@ public class GuiIngame extends Gui
 
         if (Config.isVignetteEnabled())
         {
-            this.renderVignette(this.mc.thePlayer.getBrightness(partialTicks), scaledresolution);
+            this.renderVignette(this.mc.player.getBrightness(partialTicks), scaledresolution);
         }
         else
         {
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         }
 
-        ItemStack itemstack = this.mc.thePlayer.inventory.armorItemInSlot(3);
+        ItemStack itemstack = this.mc.player.inventory.armorItemInSlot(3);
 
         if (this.mc.gameSettings.thirdPersonView == 0 && itemstack != null && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin))
         {
             this.renderPumpkinOverlay(scaledresolution);
         }
 
-        if (!this.mc.thePlayer.isPotionActive(Potion.confusion))
+        if (!this.mc.player.isPotionActive(Potion.confusion))
         {
-            float f = this.mc.thePlayer.prevTimeInPortal + (this.mc.thePlayer.timeInPortal - this.mc.thePlayer.prevTimeInPortal) * partialTicks;
+            float f = this.mc.player.prevTimeInPortal + (this.mc.player.timeInPortal - this.mc.player.prevTimeInPortal) * partialTicks;
 
             if (f > 0.0F)
             {
@@ -194,12 +194,12 @@ public class GuiIngame extends Gui
 
         GlStateManager.disableBlend();
 
-        if (this.mc.thePlayer.getSleepTimer() > 0)
+        if (this.mc.player.getSleepTimer() > 0)
         {
             this.mc.mcProfiler.startSection("sleep");
             GlStateManager.disableDepth();
             GlStateManager.disableAlpha();
-            int j1 = this.mc.thePlayer.getSleepTimer();
+            int j1 = this.mc.player.getSleepTimer();
             float f1 = (float)j1 / 100.0F;
 
             if (f1 > 1.0F)
@@ -217,7 +217,7 @@ public class GuiIngame extends Gui
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         int k1 = i / 2 - 91;
 
-        if (this.mc.thePlayer.isRidingHorse())
+        if (this.mc.player.isRidingHorse())
         {
             this.renderHorseJumpBar(scaledresolution, k1);
         }
@@ -230,7 +230,7 @@ public class GuiIngame extends Gui
         {
             this.renderSelectedItem(scaledresolution);
         }
-        else if (this.mc.thePlayer.isSpectator())
+        else if (this.mc.player.isSpectator())
         {
             this.spectatorGui.renderSelectedItem(scaledresolution);
         }
@@ -318,9 +318,9 @@ public class GuiIngame extends Gui
             this.mc.mcProfiler.endSection();
         }
 
-        Scoreboard scoreboard = this.mc.theWorld.getScoreboard();
+        Scoreboard scoreboard = this.mc.world.getScoreboard();
         ScoreObjective scoreobjective = null;
-        ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(this.mc.thePlayer.getName());
+        ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(this.mc.player.getName());
 
         if (scoreplayerteam != null)
         {
@@ -350,7 +350,7 @@ public class GuiIngame extends Gui
         GlStateManager.popMatrix();
         scoreobjective1 = scoreboard.getObjectiveInDisplaySlot(0);
 
-        if (this.mc.gameSettings.keyBindPlayerList.isKeyDown() && (!this.mc.isIntegratedServerRunning() || this.mc.thePlayer.sendQueue.getPlayerInfoMap().size() > 1 || scoreobjective1 != null))
+        if (this.mc.gameSettings.keyBindPlayerList.isKeyDown() && (!this.mc.isIntegratedServerRunning() || this.mc.player.sendQueue.getPlayerInfoMap().size() > 1 || scoreobjective1 != null))
         {
             this.overlayPlayerList.updatePlayerList(true);
             this.overlayPlayerList.renderPlayerlist(i, scoreboard, scoreobjective1);
@@ -400,7 +400,7 @@ public class GuiIngame extends Gui
     {
         this.mc.mcProfiler.startSection("jumpBar");
         this.mc.getTextureManager().bindTexture(Gui.icons);
-        float f = this.mc.thePlayer.getHorseJumpPower();
+        float f = this.mc.player.getHorseJumpPower();
         int i = 182;
         int j = (int)(f * (float)(i + 1));
         int k = scaledRes.getScaledHeight() - 32 + 3;
@@ -418,12 +418,12 @@ public class GuiIngame extends Gui
     {
         this.mc.mcProfiler.startSection("expBar");
         this.mc.getTextureManager().bindTexture(Gui.icons);
-        int i = this.mc.thePlayer.xpBarCap();
+        int i = this.mc.player.xpBarCap();
 
         if (i > 0)
         {
             int j = 182;
-            int k = (int)(this.mc.thePlayer.experience * (float)(j + 1));
+            int k = (int)(this.mc.player.experience * (float)(j + 1));
             int l = scaledRes.getScaledHeight() - 32 + 3;
             this.drawTexturedModalRect(x, l, 0, 64, j, 5);
 
@@ -435,7 +435,7 @@ public class GuiIngame extends Gui
 
         this.mc.mcProfiler.endSection();
 
-        if (this.mc.thePlayer.experienceLevel > 0)
+        if (this.mc.player.experienceLevel > 0)
         {
             this.mc.mcProfiler.startSection("expLevel");
             int k1 = 8453920;
@@ -445,7 +445,7 @@ public class GuiIngame extends Gui
                 k1 = CustomColors.getExpBarTextColor(k1);
             }
 
-            String s = "" + this.mc.thePlayer.experienceLevel;
+            String s = "" + this.mc.player.experienceLevel;
             int l1 = (scaledRes.getScaledWidth() - this.getFontRenderer().getStringWidth(s)) / 2;
             int i1 = scaledRes.getScaledHeight() - 31 - 4;
             int j1 = 0;
@@ -505,13 +505,13 @@ public class GuiIngame extends Gui
         this.mc.mcProfiler.startSection("demo");
         String s = "";
 
-        if (this.mc.theWorld.getTotalWorldTime() >= 120500L)
+        if (this.mc.world.getTotalWorldTime() >= 120500L)
         {
             s = I18n.format("demo.demoExpired", new Object[0]);
         }
         else
         {
-            s = I18n.format("demo.remainingTime", new Object[] {StringUtils.ticksToElapsedTime((int)(120500L - this.mc.theWorld.getTotalWorldTime()))});
+            s = I18n.format("demo.remainingTime", new Object[] {StringUtils.ticksToElapsedTime((int)(120500L - this.mc.world.getTotalWorldTime()))});
         }
 
         int i = this.getFontRenderer().getStringWidth(s);
@@ -521,7 +521,7 @@ public class GuiIngame extends Gui
 
     protected boolean showCrosshair()
     {
-        if (this.mc.gameSettings.showDebugInfo && !this.mc.thePlayer.hasReducedDebug() && !this.mc.gameSettings.reducedDebugInfo)
+        if (this.mc.gameSettings.showDebugInfo && !this.mc.player.hasReducedDebug() && !this.mc.gameSettings.reducedDebugInfo)
         {
             return false;
         }
@@ -537,7 +537,7 @@ public class GuiIngame extends Gui
                 {
                     BlockPos blockpos = this.mc.objectMouseOver.getBlockPos();
 
-                    if (this.mc.theWorld.getTileEntity(blockpos) instanceof IInventory)
+                    if (this.mc.world.getTileEntity(blockpos) instanceof IInventory)
                     {
                         return true;
                     }
@@ -883,7 +883,7 @@ public class GuiIngame extends Gui
 
             if (entityplayer.isInsideOfMaterial(Material.water))
             {
-                int l6 = this.mc.thePlayer.getAir();
+                int l6 = this.mc.player.getAir();
                 int k7 = MathHelper.ceiling_double_int((double)(l6 - 2) * 10.0D / 300.0D);
                 int i8 = MathHelper.ceiling_double_int((double)l6 * 10.0D / 300.0D) - k7;
 
@@ -973,8 +973,8 @@ public class GuiIngame extends Gui
         {
             lightLevel = 1.0F - lightLevel;
             lightLevel = MathHelper.clamp_float(lightLevel, 0.0F, 1.0F);
-            WorldBorder worldborder = this.mc.theWorld.getWorldBorder();
-            float f = (float)worldborder.getClosestDistance(this.mc.thePlayer);
+            WorldBorder worldborder = this.mc.world.getWorldBorder();
+            float f = (float)worldborder.getClosestDistance(this.mc.player);
             double d0 = Math.min(worldborder.getResizeSpeed() * (double)worldborder.getWarningTime() * 1000.0D, Math.abs(worldborder.getTargetSize() - worldborder.getDiameter()));
             double d1 = Math.max((double)worldborder.getWarningDistance(), d0);
 
@@ -1103,9 +1103,9 @@ public class GuiIngame extends Gui
         ++this.updateCounter;
         this.streamIndicator.updateStreamAlpha();
 
-        if (this.mc.thePlayer != null)
+        if (this.mc.player != null)
         {
-            ItemStack itemstack = this.mc.thePlayer.inventory.getCurrentItem();
+            ItemStack itemstack = this.mc.player.inventory.getCurrentItem();
 
             if (itemstack == null)
             {

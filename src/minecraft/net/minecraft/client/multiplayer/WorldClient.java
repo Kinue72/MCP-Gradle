@@ -269,7 +269,7 @@ public class WorldClient extends World
      */
     public Entity getEntityByID(int id)
     {
-        return (Entity)(id == this.mc.thePlayer.getEntityId() ? this.mc.thePlayer : super.getEntityByID(id));
+        return (Entity)(id == this.mc.player.getEntityId() ? this.mc.player : super.getEntityByID(id));
     }
 
     public Entity removeEntityFromWorld(int entityID)
@@ -318,7 +318,7 @@ public class WorldClient extends World
     {
         int i = 16;
         Random random = new Random();
-        ItemStack itemstack = this.mc.thePlayer.getHeldItem();
+        ItemStack itemstack = this.mc.player.getHeldItem();
         boolean flag = this.mc.playerController.getCurrentGameType() == WorldSettings.GameType.CREATIVE && itemstack != null && Block.getBlockFromItem(itemstack.getItem()) == Blocks.barrier;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
@@ -419,7 +419,7 @@ public class WorldClient extends World
         {
             public String call() throws Exception
             {
-                return WorldClient.this.mc.thePlayer.getClientBrand();
+                return WorldClient.this.mc.player.getClientBrand();
             }
         });
         crashreportcategory.addCrashSectionCallable("Server type", new Callable<String>()

@@ -42,15 +42,15 @@ import net.minecraft.potion.Potion;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MovementInput;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
+import tech.mania.Mania;
+import tech.mania.core.features.event.MoveEvent;
+import tech.mania.core.features.event.PreUpdateEvent;
+import tech.mania.core.features.event.RotationEvent;
+import tech.mania.core.util.RandomUtil;
+import tech.mania.core.util.RotationUtil;
 
 public class EntityPlayerSP extends AbstractClientPlayer
 {
@@ -188,6 +188,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdateWalkingPlayer()
     {
+        Mania.getEventManager().call(new PreUpdateEvent());
         boolean flag = this.isSprinting();
 
         if (flag != this.serverSprintState)
@@ -906,5 +907,41 @@ public class EntityPlayerSP extends AbstractClientPlayer
             this.capabilities.isFlying = false;
             this.sendPlayerAbilities();
         }
+    }
+
+    @Override
+    public void setAngles(float yaw, float pitch) {
+        float f = RotationUtil.virtualPitch;
+        float f1 = RotationUtil.virtualYaw;
+        RotationUtil.virtualYaw = (float)((double)RotationUtil.virtualYaw + (double)yaw * 0.15D);
+        RotationUtil.virtualPitch = (float)((double)RotationUtil.virtualPitch - (double)pitch * 0.15D);
+        RotationUtil.virtualPitch = MathHelper.clamp_float(RotationUtil.virtualPitch, -90.0F, 90.0F);
+        RotationUtil.virtualPrevPitch += RotationUtil.virtualPitch - f;
+        RotationUtil.virtualPrevYaw += RotationUtil.virtualYaw - f1;
+        //args.set(0, 0d);
+        //args.set(1, 0d);
+
+        final RotationEvent rotationEvent = new RotationEvent(
+                RotationUtil.virtualYaw,
+                RotationUtil.virtualPitch
+        );
+        if (rotationEvent.yaw == RotationUtil.virtualYaw || rotationEvent.pitch == RotationUtil.virtualPitch) {
+            rotationEvent.yaw = RotationUtil.smoothRot(mc.player.rotationYaw, rotationEvent.yaw, RandomUtil.nextFloat(0, 50));
+            rotationEvent.pitch = RotationUtil.smoothRot(mc.player.rotationPitch,  rotationEvent.pitch, RandomUtil.nextFloat(5, 15));
+            rotationEvent.pitch += (float) (Math.sin(MathHelper.wrapDegrees(mc.player.rotationYaw - rotationEvent.yaw) / 5) * 5);
+        }
+        Mania.getEventManager().call(rotationEvent);
+
+        this.rotationYaw = (RotationUtil.getFixedSensitivityAngle(rotationEvent.yaw, this.rotationYaw));
+        this.rotationPitch = (RotationUtil.getFixedSensitivityAngle(rotationEvent.pitch, this.rotationPitch));
+        this.rotationPitch = (MathHelper.clamp_float(this.rotationPitch, -90f, 90f));
+        //super.setAngles(yaw, pitch);
+    }
+
+    @Override
+    public void moveEntity(double x, double y, double z) {
+        final MoveEvent event = new MoveEvent(x, y, z);
+        Mania.getEventManager().call(event);
+        super.moveEntity(event.x, event.y, event.z);
     }
 }

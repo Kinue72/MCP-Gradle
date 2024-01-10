@@ -445,7 +445,7 @@ public class EntityWither extends EntityMob implements IBossDisplayData, IRanged
 
     private float func_82204_b(float p_82204_1_, float p_82204_2_, float p_82204_3_)
     {
-        float f = MathHelper.wrapAngleTo180_float(p_82204_2_ - p_82204_1_);
+        float f = MathHelper.wrapDegrees(p_82204_2_ - p_82204_1_);
 
         if (f > p_82204_3_)
         {

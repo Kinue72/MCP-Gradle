@@ -277,10 +277,10 @@ public class IntegratedServer extends MinecraftServer
                 this.getConfigurationManager().setViewDistance(this.mc.gameSettings.renderDistanceChunks);
             }
 
-            if (this.mc.theWorld != null)
+            if (this.mc.world != null)
             {
                 WorldInfo worldinfo1 = this.worldServers[0].getWorldInfo();
-                WorldInfo worldinfo = this.mc.theWorld.getWorldInfo();
+                WorldInfo worldinfo = this.mc.world.getWorldInfo();
 
                 if (!worldinfo1.isDifficultyLocked() && worldinfo.getDifficulty() != worldinfo1.getDifficulty())
                 {
@@ -318,7 +318,7 @@ public class IntegratedServer extends MinecraftServer
      */
     public EnumDifficulty getDifficulty()
     {
-        return this.mc.theWorld == null ? this.mc.gameSettings.difficulty : this.mc.theWorld.getWorldInfo().getDifficulty();
+        return this.mc.world == null ? this.mc.gameSettings.difficulty : this.mc.world.getWorldInfo().getDifficulty();
     }
 
     /**
@@ -430,9 +430,9 @@ public class IntegratedServer extends MinecraftServer
     {
         super.setDifficultyForAllWorlds(difficulty);
 
-        if (this.mc.theWorld != null)
+        if (this.mc.world != null)
         {
-            this.mc.theWorld.getWorldInfo().setDifficulty(difficulty);
+            this.mc.world.getWorldInfo().setDifficulty(difficulty);
         }
     }
 
