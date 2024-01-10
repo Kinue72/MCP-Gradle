@@ -107,7 +107,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
 
             if (!Config.zoomMode)
             {
-                Entity entity = this.mc.thePlayer;
+                Entity entity = this.mc.player;
                 double d0 = itemFrame.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 
                 if (d0 > 4096.0D)
@@ -164,7 +164,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
                             double d2 = texturecompass.angleDelta;
                             texturecompass.currentAngle = 0.0D;
                             texturecompass.angleDelta = 0.0D;
-                            texturecompass.updateCompass(itemFrame.worldObj, itemFrame.posX, itemFrame.posZ, (double)MathHelper.wrapAngleTo180_float((float)(180 + itemFrame.facingDirection.getHorizontalIndex() * 90)), false, true);
+                            texturecompass.updateCompass(itemFrame.worldObj, itemFrame.posX, itemFrame.posZ, (double)MathHelper.wrapDegrees((float)(180 + itemFrame.facingDirection.getHorizontalIndex() * 90)), false, true);
                             texturecompass.currentAngle = d1;
                             texturecompass.angleDelta = d2;
                         }

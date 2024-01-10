@@ -321,6 +321,14 @@ public class BlockPos extends Vec3i
         };
     }
 
+    public Vec3 toCenterPos() {
+        return new Vec3(
+                this.getX() + 0.5,
+                this.getY() + 0.5,
+                this.getZ() + 0.5
+        );
+    }
+
     public static final class MutableBlockPos extends BlockPos
     {
         private int x;

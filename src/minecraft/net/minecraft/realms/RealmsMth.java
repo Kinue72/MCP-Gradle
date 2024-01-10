@@ -133,7 +133,7 @@ public class RealmsMth
 
     public static float wrapDegrees(float p_wrapDegrees_0_)
     {
-        return MathHelper.wrapAngleTo180_float(p_wrapDegrees_0_);
+        return MathHelper.wrapDegrees(p_wrapDegrees_0_);
     }
 
     public static float clamp(float p_clamp_0_, float p_clamp_1_, float p_clamp_2_)

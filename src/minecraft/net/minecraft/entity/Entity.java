@@ -2816,4 +2816,11 @@ public abstract class Entity implements ICommandSender
 
         EnchantmentHelper.applyArthropodEnchantments(entityLivingBaseIn, entityIn);
     }
+
+    public double getDistanceSq(Vec3 vec) {
+        double dx = vec.xCoord - this.posX;
+        double dy = vec.yCoord - this.posY;
+        double dz = vec.zCoord - this.posZ;
+        return dx * dx + dy * dy + dz * dz;
+    }
 }

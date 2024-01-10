@@ -1326,7 +1326,7 @@ public class CustomColors
 
             case 0:
                 Minecraft minecraft = Minecraft.getMinecraft();
-                fogVec = getFogColor(fogVec, minecraft.theWorld, renderViewEntity.posX, renderViewEntity.posY + 1.0D, renderViewEntity.posZ);
+                fogVec = getFogColor(fogVec, minecraft.world, renderViewEntity.posX, renderViewEntity.posY + 1.0D, renderViewEntity.posZ);
                 break;
 
             case 1:
@@ -1344,7 +1344,7 @@ public class CustomColors
         {
             case 0:
                 Minecraft minecraft = Minecraft.getMinecraft();
-                skyVec = getSkyColor(skyVec, minecraft.theWorld, renderViewEntity.posX, renderViewEntity.posY + 1.0D, renderViewEntity.posZ);
+                skyVec = getSkyColor(skyVec, minecraft.world, renderViewEntity.posX, renderViewEntity.posY + 1.0D, renderViewEntity.posZ);
                 break;
 
             case 1:

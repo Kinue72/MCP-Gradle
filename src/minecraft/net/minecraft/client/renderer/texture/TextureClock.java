@@ -20,11 +20,11 @@ public class TextureClock extends TextureAtlasSprite
             Minecraft minecraft = Minecraft.getMinecraft();
             double d0 = 0.0D;
 
-            if (minecraft.theWorld != null && minecraft.thePlayer != null)
+            if (minecraft.world != null && minecraft.player != null)
             {
-                d0 = (double)minecraft.theWorld.getCelestialAngle(1.0F);
+                d0 = (double)minecraft.world.getCelestialAngle(1.0F);
 
-                if (!minecraft.theWorld.provider.isSurfaceWorld())
+                if (!minecraft.world.provider.isSurfaceWorld())
                 {
                     d0 = Math.random();
                 }

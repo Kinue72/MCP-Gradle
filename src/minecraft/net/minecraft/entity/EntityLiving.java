@@ -721,7 +721,7 @@ public abstract class EntityLiving extends EntityLivingBase
      */
     private float updateRotation(float p_70663_1_, float p_70663_2_, float p_70663_3_)
     {
-        float f = MathHelper.wrapAngleTo180_float(p_70663_2_ - p_70663_1_);
+        float f = MathHelper.wrapDegrees(p_70663_2_ - p_70663_1_);
 
         if (f > p_70663_3_)
         {

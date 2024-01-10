@@ -138,7 +138,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
                     EntityLivingBase entitylivingbase = (EntityLivingBase)entity.ridingEntity;
                     f = this.interpolateRotation(entitylivingbase.prevRenderYawOffset, entitylivingbase.renderYawOffset, partialTicks);
                     f2 = f1 - f;
-                    float f3 = MathHelper.wrapAngleTo180_float(f2);
+                    float f3 = MathHelper.wrapDegrees(f2);
 
                     if (f3 < -85.0F)
                     {
@@ -335,7 +335,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
     protected void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float scaleFactor)
     {
         boolean flag = !entitylivingbaseIn.isInvisible();
-        boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer);
+        boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().player);
 
         if (flag || flag1)
         {
@@ -689,7 +689,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
     protected boolean canRenderName(T entity)
     {
-        EntityPlayerSP entityplayersp = Minecraft.getMinecraft().thePlayer;
+        EntityPlayerSP entityplayersp = Minecraft.getMinecraft().player;
 
         if (entity instanceof EntityPlayer && entity != entityplayersp)
         {

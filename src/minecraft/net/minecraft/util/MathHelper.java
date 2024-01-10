@@ -221,7 +221,7 @@ public class MathHelper
     /**
      * the angle is reduced to an angle between -180 and +180 by mod, and a 360 check
      */
-    public static float wrapAngleTo180_float(float value)
+    public static float wrapDegrees(float value)
     {
         value = value % 360.0F;
 

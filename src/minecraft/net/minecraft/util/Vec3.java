@@ -2,13 +2,13 @@ package net.minecraft.util;
 
 public class Vec3
 {
-    /** X coordinate of Vec3D */
+    /** X coordinate of Vec3 */
     public final double xCoord;
 
-    /** Y coordinate of Vec3D */
+    /** Y coordinate of Vec3 */
     public final double yCoord;
 
-    /** Z coordinate of Vec3D */
+    /** Z coordinate of Vec3 */
     public final double zCoord;
 
     public Vec3(double x, double y, double z)
@@ -208,5 +208,13 @@ public class Vec3
         double d1 = this.yCoord;
         double d2 = this.zCoord * (double)f - this.xCoord * (double)f1;
         return new Vec3(d0, d1, d2);
+    }
+
+    public Vec3 multiply(double i) {
+        return new Vec3(
+                this.xCoord * i,
+                this.yCoord * i,
+                this.zCoord * i
+        );
     }
 }

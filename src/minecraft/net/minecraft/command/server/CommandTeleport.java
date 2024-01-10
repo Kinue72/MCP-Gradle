@@ -112,20 +112,20 @@ public class CommandTeleport extends CommandBase
 
                         if (!commandbase$coordinatearg3.func_179630_c())
                         {
-                            f = MathHelper.wrapAngleTo180_float(f);
+                            f = MathHelper.wrapDegrees(f);
                         }
 
                         float f1 = (float)commandbase$coordinatearg4.func_179629_b();
 
                         if (!commandbase$coordinatearg4.func_179630_c())
                         {
-                            f1 = MathHelper.wrapAngleTo180_float(f1);
+                            f1 = MathHelper.wrapDegrees(f1);
                         }
 
                         if (f1 > 90.0F || f1 < -90.0F)
                         {
-                            f1 = MathHelper.wrapAngleTo180_float(180.0F - f1);
-                            f = MathHelper.wrapAngleTo180_float(f + 180.0F);
+                            f1 = MathHelper.wrapDegrees(180.0F - f1);
+                            f = MathHelper.wrapDegrees(f + 180.0F);
                         }
 
                         entity.mountEntity((Entity)null);
@@ -139,8 +139,8 @@ public class CommandTeleport extends CommandBase
 
                         if (f3 > 90.0F || f3 < -90.0F)
                         {
-                            f3 = MathHelper.wrapAngleTo180_float(180.0F - f3);
-                            f2 = MathHelper.wrapAngleTo180_float(f2 + 180.0F);
+                            f3 = MathHelper.wrapDegrees(180.0F - f3);
+                            f2 = MathHelper.wrapDegrees(f2 + 180.0F);
                         }
 
                         entity.setLocationAndAngles(commandbase$coordinatearg.func_179628_a(), commandbase$coordinatearg1.func_179628_a(), commandbase$coordinatearg2.func_179628_a(), f2, f3);

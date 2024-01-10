@@ -69,7 +69,7 @@ public class EntityAIControlledByPlayer extends EntityAIBase
     {
         EntityPlayer entityplayer = (EntityPlayer)this.thisEntity.riddenByEntity;
         EntityCreature entitycreature = (EntityCreature)this.thisEntity;
-        float f = MathHelper.wrapAngleTo180_float(entityplayer.rotationYaw - this.thisEntity.rotationYaw) * 0.5F;
+        float f = MathHelper.wrapDegrees(entityplayer.rotationYaw - this.thisEntity.rotationYaw) * 0.5F;
 
         if (f > 5.0F)
         {
@@ -81,7 +81,7 @@ public class EntityAIControlledByPlayer extends EntityAIBase
             f = -5.0F;
         }
 
-        this.thisEntity.rotationYaw = MathHelper.wrapAngleTo180_float(this.thisEntity.rotationYaw + f);
+        this.thisEntity.rotationYaw = MathHelper.wrapDegrees(this.thisEntity.rotationYaw + f);
 
         if (this.currentSpeed < this.maxSpeed)
         {
